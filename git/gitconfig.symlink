@@ -1,0 +1,7 @@
+[user]
+	name = Tommy Keswick
+	email = tkeswick@gmail.com
+[core]
+	excludesfile = ~/.gitignore_global
+[push]
+	default = simple
