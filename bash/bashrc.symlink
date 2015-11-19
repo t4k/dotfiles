@@ -1,0 +1,29 @@
+# .bashrc should contain aliases, PATH settings, colors, etc.
+# In Mac OS X the .bash_profile is called for every new Terminal.app
+# window, instead of only for login shells. This setup is more
+# platform agnostic.
+# ------------------------------------------------------------------
+
+# Import Colors
+# -------------
+if [ -f ~/.bash_colors ]; then
+  source ~/.bash_colors
+fi
+
+# Aliases
+# -------
+alias ll="ls -Ahl"
+alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
+alias ..='cd ../'                           # Go back 1 directory level
+alias ...='cd ../../'                       # Go back 2 directory levels
+alias .3='cd ../../../'                     # Go back 3 directory levels
+alias .4='cd ../../../../'                  # Go back 4 directory levels
+alias .5='cd ../../../../../'               # Go back 5 directory levels
+alias .6='cd ../../../../../../'            # Go back 6 directory levels
+
+# Bash Completion for Git
+# installed with: `brew install git bash-completion`
+# --------------------------------------------------
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi

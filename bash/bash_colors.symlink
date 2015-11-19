@@ -75,13 +75,15 @@ On_IPurple='\e[0;105m'  # Purple
 On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
 
+# Color Combinations
+Black_On_Cyan="\e[1;30;106m"
+
 Newline="\n"
 Space=" "
 Hostname="\h"
 Date="\d"
-Time="\T"
+Time="\t"
 Path="\w"
 Prompt="\$"
 
-PS1=$Newline$BBlack$On_IBlack$Space$Hostname$Space$Color_Off$Space$Date$Space$Time$Space$Path$Newline$Prompt$Space
-
+PS1="$Newline$Black_On_Cyan $Hostname $Color_Off $Date $Time $Path$Newline$Prompt "
