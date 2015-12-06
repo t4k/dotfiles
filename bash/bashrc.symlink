@@ -27,3 +27,9 @@ alias .6='cd ../../../../../../'            # Go back 6 directory levels
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
+
+# Caskroom Options
+# ----------------
+# (see https://github.com/caskroom/homebrew-cask/blob/master/USAGE.md#options)
+# Create symlinks in the root Applications directory instead of the home Applications directory.
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
