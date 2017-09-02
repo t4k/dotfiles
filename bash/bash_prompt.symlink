@@ -78,6 +78,7 @@ On_IWhite='\e[0;107m'   # White
 # Color Combinations
 Black_On_Cyan="\e[1;30;106m"
 
+# Variables
 Newline="\n"
 Space=" "
 Hostname="\h"
@@ -86,4 +87,18 @@ Time="\t"
 Path="\w"
 Prompt="\$"
 
-PS1="$Newline$Black_On_Cyan $Hostname $Color_Off $Date $Time $Path$Newline$Prompt "
+# Add last command time to prompt
+prompt() {
+    # requires HISTTIMEFORMAT="%s " to be set
+    LastCommandTime=$(history | tail -1 | cut -d ' ' -f 5)
+    CurrentTime=$(date +%s)
+    LastCommandDuration="$((CurrentTime-LastCommandTime))s"
+
+    if [[ -z $LastEnter || $LastEnter = "$LastCommandTime" ]]; then
+        PS1="$Newline$Black_On_Cyan ok computer $Color_Off $Date $Time $Path$Newline$Prompt "
+    else
+        PS1="$Newline$Black_On_Cyan $LastCommandDuration $Color_Off $Date $Time $Path$Newline$Prompt "
+    fi
+    LastEnter=$LastCommandTime
+}
+PROMPT_COMMAND=prompt
