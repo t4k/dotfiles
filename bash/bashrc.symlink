@@ -33,3 +33,42 @@ fi
 # (see https://github.com/caskroom/homebrew-cask/blob/master/USAGE.md#options)
 # Create symlinks in the root Applications directory instead of the home Applications directory.
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+
+# Functions
+# ---------
+# wipe local site database and replace with copy from remote
+# first required parameter is the site shortname part of the drush alias
+# second required parameter is `production` or `dev`
+# function assumes local, dev, and production drush aliases are set up
+dsync () {
+  drush cc all &&
+  drush bb &&
+  drush sql-sync --create-db -y @$1_$2 @$1_local;
+  drush rr &&
+  drush uli --browser=0;
+}
+
+# Environment Variables
+# ---------------------
+
+export GIT_EDITOR=vim
+#export EDITOR=vim
+
+# PATH settings
+export PATH="$PATH:$HOME/bin:$HOME/.composer/vendor/bin"
+export PATH="$PATH:/Applications/Dev Desktop/mysql/bin"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export PATH=$HOME/bin/git-subrepo/lib:$PATH
+export MANPATH=$HOME/bin/git-subrepo/man:$MANPATH
+
+export PATH=/usr/local/sbin:$PATH
+
+# with Acquia Dev Desktop 2 this is needed to get the database connection for
+# things like drush sql-sync, etc.
+export DEVDESKTOP_DRUPAL_SETTINGS_DIR="$HOME/.acquia/DevDesktop/DrupalSettings"
+
+export PATH="$PATH:/Applications/Dev Desktop/tools"
+
